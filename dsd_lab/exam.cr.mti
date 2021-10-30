@@ -1,0 +1,7 @@
+D:/lab/task.v {1 {vlog -work work D:/lab/task.v
+Model Technology ModelSim SE vlog 5.7f Compiler 2003.09 Sep 15 2003
+
+} {} {}} D:/lab/task_tb.v {1 {vlog -work work D:/lab/task_tb.v
+Model Technology ModelSim SE vlog 5.7f Compiler 2003.09 Sep 15 2003
+
+} {} {}}

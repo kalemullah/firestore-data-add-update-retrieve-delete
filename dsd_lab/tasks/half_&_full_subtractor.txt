@@ -1,0 +1,91 @@
+module HalfSubstractor(a,b,difference,borrow);
+input a,b;
+output difference,borrow;
+xor(difference,a,b);
+assign borrow=(~a&b);
+endmodule
+
+module TestModule;
+// Inputs
+reg a;
+reg b;
+
+// Outputs
+wire difference;
+wire borrow;
+HalfSubstractor uut (.a(a),.b(b),.difference(difference),.borrow(borrow));
+
+initial begin
+
+a = 0;
+b = 0;
+a = 1;
+b = 0;
+end
+endmodule
+
+///////////////////////////////////////////////////////////////////////////////////////////
+module FullSubstractor(a,b,difference,bin,bout);
+input a,b,bin;
+output difference,bout;
+assign difference=(a^b^bin);
+assign bout=(~a&b)|(~a&bin)|(b&bin);
+endmodule
+
+module TestModule;
+// Inputs
+reg a;
+reg b;
+reg bin;
+
+// Outputs
+wire difference;
+wire bout;
+
+FullSubstractor uut (.a(a),.b(b),.difference(difference),.bin(bin),.bout(bout));
+
+initial begin
+a = 0;
+b = 0;
+bin = 0;
+a = 1;
+b = 1;
+bin = 1;
+end
+endmodule
+
+///////////////////////////////////////////////////////////////////////////////////////////
+module MultibitSubstractor(a,b,bin,difference,bout);
+input [3:0] a,b;
+input bin;
+output [3:0]difference;
+output bout;
+assign {bout,difference}=a-b-bin;
+endmodule
+
+module TestModule;
+// Inputs
+reg [3:0] a;
+reg [3:0] b;
+reg bin;
+
+// Outputs
+wire [3:0] difference;
+wire bout;
+
+// Instantiate the Unit Under Test (UUT)
+MultibitSubstractor uut (.a(a),.b(b),.bin(bin),.difference(difference),.bout(bout));
+
+initial begin
+// Initialize Inputs
+a = 0;
+b = 0;
+bin = 0;
+a = 6;
+b = 2;
+bin = 1;
+end
+endmodule
+
+
+

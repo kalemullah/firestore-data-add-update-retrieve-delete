@@ -1,0 +1,44 @@
+module D_Flipflop(Din,clk,reset,q);
+input Din,clk,reset;
+output reg q;
+always@(posedge clk)
+begin
+if(reset)
+q=1'b0;
+else
+q=Din;
+end
+endmodule
+///////////////////////////////8 bit D Fliflop//////////////////////////////////
+module DFlipflop(Din,clk,clear,enable,Q);
+input [7:0]Din;
+input clk,clear,enable;
+output reg [7:0] Q;
+always@(posedge clk)
+if(enable)
+begin
+if(clear)
+Q<=0;
+else
+Q<=Din;
+end
+endmodule
+
+//////////////////////////////////////////////////////////////////////////////////
+module T_flipflop(T,clk,reset,q);
+input T,clk,reset;
+output q;
+wire w;
+assign w=T^q;
+D_Flipflop dff(w,clk,reset,q);
+endmodule
+
+///////////////////////////////////////////////////////////////////////////////////////
+module JKFlipflop(J,K,clk,reset,q);
+input J,K,clk,reset;
+output q;
+wire w;
+assign w=(J&~q)|(~K&q);
+D_Flipflop dff(w,clk,reset,q);
+endmodule
+

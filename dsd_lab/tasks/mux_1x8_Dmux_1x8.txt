@@ -1,0 +1,86 @@
+module Demultiplexer(in,s0,s1,s2,d0,d1,d2,d3,d4,d5,d6,d7);
+input in,s0,s1,s2;
+output d0,d1,d2,d3,d4,d5,d6,d7;
+assign d0=(in & ~s2 & ~s1 &~s0),
+d1=(in & ~s2 & ~s1 &s0),
+d2=(in & ~s2 & s1 &~s0),
+d3=(in & ~s2 & s1 &s0),
+d4=(in & s2 & ~s1 &~s0),
+d5=(in & s2 & ~s1 &s0),
+d6=(in & s2 & s1 &~s0),
+d7=(in & s2 & s1 &s0);
+endmodule
+
+module TestModule;
+// Inputs
+reg in,s0,s1,s2;
+
+// Outputs
+wire d0,d1,d2,d3,d4,d5,d6,d7;
+
+Demultiplexer uut (.in(in),.s0(s0),.s1(s1),.s2(s2),.d0(d0),.d1(d1),.d2(d2),.d3(d3),.d4(d4),.d5(d5),.d6(d6),.d7(d7));
+initial begin
+// Initialize Inputs
+in = 0;
+s0 = 0;
+s1 = 0;
+s2 = 0;
+in = 1;
+s0 = 0;
+s1 = 1;
+s2 = 0;
+end
+endmodule
+/////////////////////////////////////////////////////////////////////////////////////////////////
+module Mulitplexer(d0,d1,d2,d3,d4,d5,d6,d7,sel,out);
+input d0,d1,d2,d3,d4,d5,d6,d7;
+input [2:0] sel;
+output reg out;
+always@(sel)
+begin
+case(sel)
+3'b000:out=d0;
+3'b001:out=d1;
+3'b010:out=d2;
+3'b011:out=d3;
+3'b100:out=d4;
+3'b101:out=d5;
+3'b110:out=d6;
+3'b111:out=d7;
+endcase
+end
+endmodule
+
+module TestModule;
+// Inputs
+reg d0,d1,d2,d3,d4,d5,d6,d7;
+reg [2:0] sel;
+
+// Outputs
+wire out;
+
+Mulitplexer uut (.d0(d0),.d1(d1),.d2(d2),.d3(d3),.d4(d4),.d5(d5),.d6(d6),.d7(d7),.sel(sel),.out(out));
+
+initial begin
+// Initialize Inputs
+d0 = 0;
+d1 = 0;
+d2 = 0;
+d3 = 0;
+d4 = 0;
+d5 = 0;
+d6 = 0;
+d7 = 0;
+sel = 0;
+
+d0 = 0;
+d1 = 0;
+d2 = 0;
+d3 = 0;
+d4 = 1;
+d5 = 1;
+d6 = 0;
+d7 = 1;
+sel = 5;
+end
+endmodule

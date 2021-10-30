@@ -1,0 +1,66 @@
+// Verilog code for up counter
+module up_counter(input clk, reset, output[3:0] counter
+    );
+reg [3:0] counter_up;
+
+// up counter
+always @(posedge clk or posedge reset)
+begin
+if(reset)
+ counter_up <= 4'd0;
+else
+ counter_up <= counter_up + 4'd1;
+end 
+assign counter = counter_up;
+endmodule
+
+Testbench Verilog code for up counter
+module upcounter_testbench();
+reg clk, reset;
+wire [3:0] counter;
+
+up_counter dut(clk, reset, counter);
+initial begin 
+clk=0;
+forever #5 clk=~clk;
+end
+initial begin
+reset=1;
+#20;
+reset=0;
+end
+endmodule 
+
+
+// Verilog code for down counter
+module down_counter(input clk, reset, output [3:0] counter
+    );
+reg [3:0] counter_down;
+
+// down counter
+always @(posedge clk or posedge reset)
+begin
+if(reset)
+ counter_down <= 4'hf;
+else
+ counter_down <= counter_down - 4'd1;
+end 
+assign counter = counter_down;
+endmodule
+
+// Testbench Verilog code for down counter
+module downcounter_testbench();
+reg clk, reset;
+wire [3:0] counter;
+
+down_counter dut(clk, reset, counter);
+initial begin 
+clk=0;
+forever #5 clk=~clk;
+end
+initial begin
+reset=1;
+#20;
+reset=0;
+end
+endmodule 

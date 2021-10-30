@@ -1,0 +1,15 @@
+D:/lab/task2.v {1 {vlog -work work D:/lab/task2.v
+Model Technology ModelSim SE vlog 5.7f Compiler 2003.09 Sep 15 2003
+-- Compiling module Dec_4x16
+
+Top level modules:
+	Dec_4x16
+
+} {} {}} D:/lab/task2_tb.v {1 {vlog -work work D:/lab/task2_tb.v
+Model Technology ModelSim SE vlog 5.7f Compiler 2003.09 Sep 15 2003
+-- Compiling module tst_Dec_4x16
+
+Top level modules:
+	tst_Dec_4x16
+
+} {} {}}
